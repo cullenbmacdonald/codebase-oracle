@@ -1,94 +1,113 @@
 # Codebase Oracle
 
-A Claude Code plugin that mines git commit history to produce smarter skills, agents, and CLAUDE.md files that understand *why* a codebase evolved—not just its current state.
+**Your codebase has a story. Most AI tools only read the last page.**
 
-## Installation
+Codebase Oracle is a Claude Code plugin that mines your git history to understand *why* your code exists—not just what it does. It captures the institutional knowledge that lives in commit messages, PR descriptions, and the evolution of your architecture, then makes that wisdom available to Claude on demand.
 
-1. Copy or symlink the `codebase-oracle` directory to your Claude Code plugins directory
-2. The plugin will be automatically discovered on next session
+---
 
-## Commands
+## The Problem
 
-### `/oracle:divine`
+You've seen this before: an AI assistant confidently suggests a pattern your team abandoned two years ago. Or it recommends an approach that caused a production incident. Or it misses the subtle convention that emerged after three painful refactors.
 
-Perform a full mining of the repository's git history. This traverses all commits from oldest to newest, identifies significant patterns, and generates documentation.
+Static code analysis can't capture:
+- Why you migrated from REST to GraphQL (and the edge cases that drove that decision)
+- The race condition that took a week to debug
+- Why that "weird" naming convention exists
+- What you tried before settling on the current architecture
 
-```
-/oracle:divine
-```
+This knowledge lives in your git history. Engineers who've been around carry it implicitly. New team members spend months absorbing it. And AI tools? They're completely blind to it.
 
-**Output:**
-- `docs/oracle:consult/*.md` - Detailed documentation for each significant pattern
-- `docs/oracle:consult/index.yaml` - Routing index for on-demand retrieval
-- Updated `CLAUDE.md` - Critical patterns section added
-- `.claude/oracle-checkpoint.json` - Progress marker
+## The Solution
 
-### `/oracle:renew`
+Codebase Oracle traverses your commit history and extracts the decisions that matter. It identifies architectural pivots, bug patterns, abandoned approaches, and emerging conventions—then organizes them into documentation that Claude can access when relevant.
 
-Incrementally update historical documentation with new commits since the last run.
+The result: an AI assistant that understands your codebase the way a senior engineer does.
 
-```
-/oracle:renew
-```
-
-### `/oracle:consult <topic>`
-
-Query historical context for a specific topic or file.
-
-```
-/oracle:consult auth          # Search by keyword
-/oracle:consult --file src/auth/login.ts  # Search by file path
-/oracle:consult --list        # List all available topics
-```
+---
 
 ## How It Works
 
-### Tiered Documentation
+### Divine the History
 
-1. **CLAUDE.md** (always loaded) - Critical patterns, gotchas, conventions
-2. **docs/oracle:consult/** (on-demand) - Detailed historical documentation
-3. **git log** (never bulk-loaded) - Raw commits for reference
+Run `/oracle:divine` to analyze your repository's complete git history. The oracle walks through commits chronologically, evaluating each one for institutional knowledge value.
 
-### Significance Detection
+Significant commits are categorized:
+- **Architectural pivots** — Framework migrations, new patterns, structural changes
+- **Bug patterns** — Recurring issues, discovered gotchas, edge cases
+- **Abandoned approaches** — What was tried and why it didn't work
+- **Convention emergence** — How your team's standards evolved
 
-Commits are evaluated for:
-- **Architectural pivots** - Framework migrations, pattern introductions
-- **Bug patterns** - Recurring issues, gotchas discovered
-- **Abandoned approaches** - Reverted features, replaced implementations
-- **Convention emergence** - Naming, testing, structure conventions
+### Tiered Knowledge Access
 
-### Workflow Detection
+Not everything needs to be in context all the time. Codebase Oracle uses a tiered system:
 
-The plugin automatically detects:
-- **Merge-based** - Process merge commits
-- **Squash-merge** - Process all commits, filter by significance
-- **Rebase** - Process all commits, filter by significance
-- **Mixed** - Process merge commits AND significant non-merges
+**Always loaded:** Critical patterns and active gotchas go directly into your CLAUDE.md. These are the things Claude should never forget.
 
-## Plugin Structure
+**On-demand:** Detailed historical documentation lives in `docs/history/`. When you ask about authentication, Claude automatically loads the relevant history. When you edit a file, context about that area appears.
+
+**Available but not loaded:** The raw git history remains accessible for deep dives, but doesn't consume context.
+
+### Stay Current
+
+Run `/oracle:renew` after pulling new changes. The oracle picks up where it left off, processing only new commits and updating documentation as needed.
+
+### Ask Questions
+
+Use `/oracle:consult` to query historical context directly:
 
 ```
-codebase-oracle/
-├── .claude-plugin/plugin.json    # Plugin manifest
-├── agents/
-│   ├── history-miner.md          # Traverses git history
-│   ├── significance-judge.md     # Evaluates commit significance
-│   └── context-condenser.md      # Writes documentation
-├── commands/
-│   ├── oracle-mine.md            # /oracle:divine
-│   ├── oracle-update.md          # /oracle:renew
-│   └── history.md                # /oracle:consult <topic>
-├── skills/
-│   └── git-history/
-│       ├── SKILL.md              # History mining knowledge
-│       └── references/           # Detailed schemas
-├── hooks/
-│   └── hooks.json                # SessionStart hook
-└── scripts/
-    ├── detect-workflow.sh        # Workflow detection
-    ├── get-commits.sh            # Commit fetching
-    └── parse-diff.sh             # Diff parsing
+/oracle:consult auth
+/oracle:consult --file src/payments/checkout.ts
+/oracle:consult --list
 ```
+
+---
+
+## Installation
+
+```bash
+# Clone or download codebase-oracle
+git clone https://github.com/cullenbmacdonald/codebase-oracle.git
+
+# Symlink to your Claude Code plugins directory
+ln -s /path/to/codebase-oracle ~/.claude/plugins/codebase-oracle
+```
+
+The plugin will be available in your next Claude Code session.
+
+## Quick Start
+
+```bash
+# In any git repository
+cd your-project
+
+# Start Claude Code
+claude
+
+# Divine the complete history (run once)
+/oracle:divine
+
+# Later, update with new commits
+/oracle:renew
+
+# Query specific topics
+/oracle:consult authentication
+```
+
+---
+
+## Why This Matters
+
+Every codebase accumulates decisions. Some are documented. Most aren't. The ones that matter most—the hard-won lessons from production incidents, the architectural pivots that took months to execute, the patterns that emerged from painful iteration—these live only in the minds of engineers who were there.
+
+When those engineers leave, the knowledge leaves with them. When AI tools work on your code, they're working without that context.
+
+Codebase Oracle changes that. It turns your git history into institutional memory that persists across team changes and enhances every AI interaction with your code.
+
+Your commits already contain the story. Codebase Oracle helps Claude read it.
+
+---
 
 ## License
 
