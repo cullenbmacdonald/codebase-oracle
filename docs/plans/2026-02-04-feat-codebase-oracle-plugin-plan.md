@@ -220,35 +220,35 @@ See `docs/history/2024-05-api-client-refactor.md` for full context.
 
 ### Core Functionality
 
-- [ ] Plugin structure follows Claude Code conventions (skills/, agents/, commands/, hooks/)
-- [ ] Traverses git history oldest-first
-- [ ] Detects merge commits; falls back to significant commits when none exist
-- [ ] Uses LLM to judge commit significance
-- [ ] Infers intent from diffs when commit messages are unhelpful
-- [ ] Writes history docs to `docs/history/*.md`
-- [ ] Generates routing index at `docs/history/index.yaml`
-- [ ] Appends critical patterns to CLAUDE.md
-- [ ] Supports incremental updates (new commits since last run)
+- [x] Plugin structure follows Claude Code conventions (skills/, agents/, commands/, hooks/)
+- [x] Traverses git history oldest-first
+- [x] Detects merge commits; falls back to significant commits when none exist
+- [x] Uses LLM to judge commit significance
+- [x] Infers intent from diffs when commit messages are unhelpful
+- [x] Writes history docs to `docs/history/*.md`
+- [x] Generates routing index at `docs/history/index.yaml`
+- [x] Appends critical patterns to CLAUDE.md
+- [x] Supports incremental updates (new commits since last run)
 
 ### Context Management
 
-- [ ] Proactively condenses context before hitting limits
-- [ ] Maintains checkpoint for resume capability
-- [ ] Progressive disclosure: lean index, detailed docs on-demand
+- [x] Proactively condenses context before hitting limits
+- [x] Maintains checkpoint for resume capability
+- [x] Progressive disclosure: lean index, detailed docs on-demand
 
 ### Retrieval System
 
-- [ ] Keyword matching loads relevant history docs
-- [ ] File-based routing triggers on file modification
-- [ ] `/history` slash command for explicit retrieval
-- [ ] SessionStart hook loads index for routing
+- [x] Keyword matching loads relevant history docs
+- [x] File-based routing triggers on file modification
+- [x] `/history` slash command for explicit retrieval
+- [x] SessionStart hook loads index for routing
 
 ### Testing
 
-- [ ] Works on repos with merge-commit workflow
-- [ ] Works on repos with squash-merge workflow
-- [ ] Handles repos with shallow clones gracefully (warning + proceed)
-- [ ] Recovers from interrupted processing via checkpoint
+- [x] Works on repos with merge-commit workflow
+- [x] Works on repos with squash-merge workflow
+- [x] Handles repos with shallow clones gracefully (warning + proceed)
+- [x] Recovers from interrupted processing via checkpoint
 
 ## Success Metrics
 
