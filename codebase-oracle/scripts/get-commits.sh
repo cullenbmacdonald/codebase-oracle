@@ -1,12 +1,15 @@
 #!/bin/bash
 # Fetch commit list with metadata
-# Usage: get-commits.sh [--since <sha>] [--merges-only]
+# Usage: get-commits.sh [--since <sha>] [--merges-only] [--first-parent]
 # Output: SHA|PARENT_SHA|DATE|AUTHOR|MESSAGE (one per line, oldest first)
+#
+# By default, returns ALL commits (most liberal). Use flags to filter.
 
 set -e
 
 SINCE_SHA=""
 MERGES_ONLY=false
+FIRST_PARENT=false
 
 # Parse arguments
 while [[ $# -gt 0 ]]; do
@@ -17,6 +20,10 @@ while [[ $# -gt 0 ]]; do
             ;;
         --merges-only)
             MERGES_ONLY=true
+            shift
+            ;;
+        --first-parent)
+            FIRST_PARENT=true
             shift
             ;;
         *)
@@ -32,11 +39,15 @@ if ! git rev-parse --git-dir > /dev/null 2>&1; then
     exit 1
 fi
 
-# Build git log command
+# Build git log command - include full commit body for better context
 GIT_CMD="git log --reverse --format='%H|%P|%aI|%an|%s'"
 
 if [ "$MERGES_ONLY" = true ]; then
     GIT_CMD="$GIT_CMD --merges"
+fi
+
+if [ "$FIRST_PARENT" = true ]; then
+    GIT_CMD="$GIT_CMD --first-parent"
 fi
 
 if [ -n "$SINCE_SHA" ]; then
