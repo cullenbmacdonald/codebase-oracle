@@ -18,6 +18,28 @@ Static code analysis can't capture:
 
 This knowledge lives in your git history. Engineers who've been around carry it implicitly. New team members spend months absorbing it. And AI tools? They're completely blind to it.
 
+## The Legacy Repository Disadvantage
+
+Here's an uncomfortable truth: repositories created before the age of AI coding assistants are at a structural disadvantage—and that gap widens every day.
+
+**New repositories can be AI-native from birth.** Teams starting projects today can write CLAUDE.md files on day one. They can craft commit messages knowing an AI will read them. They can capture architectural decisions in formats optimized for language model consumption. Every piece of context is explicit because they know implicit knowledge doesn't transfer to AI.
+
+**Legacy repositories have years of implicit knowledge baked in.** The conventions exist but aren't written down. The architectural decisions made sense to the team at the time—no need to explain why when everyone shared the context. Commit messages like "fixed the bug" were fine because the humans reading them knew which bug.
+
+**The "catch-up" tools don't actually catch up.** There's an emerging category of tools that analyze your static codebase and generate AI context files. They scan your code structure, infer patterns, and produce a CLAUDE.md. This is better than nothing, but it's fundamentally limited.
+
+These tools can only see what exists now. They can tell you that your codebase uses service objects, but not that you tried three other patterns first. They can document your current authentication flow, but not the security incident that shaped it. They produce a snapshot of the present while the institutional knowledge that matters most lives in the journey.
+
+**The engineers who made the decisions are often gone.** That architect who chose the event-driven pattern? Left eighteen months ago. The tech lead who vetoed GraphQL the first time? At another company now. Their reasoning exists only in scattered PR descriptions, terse commit messages, and maybe a few outdated wiki pages.
+
+**Every day, the gap compounds.** AI-native repositories accumulate well-documented context with every commit. Legacy repositories continue operating the old way—implicit knowledge, terse commits, context in people's heads. The teams that benefit most from AI assistance are increasingly the ones who need it least.
+
+Codebase Oracle exists to close this gap. Your git history already contains the decisions, the pivots, the lessons learned. It's just encoded in a format that AI tools can't easily access. The oracle reads between the lines of your commits, extracts the institutional knowledge, and makes it available in a way that actually helps.
+
+You can't go back and rewrite five years of commit messages. But you can mine them for the wisdom they contain.
+
+This is how legacy repositories catch up. Not by pretending the last five years didn't happen, but by extracting the value from them. Teams using modern AI-native toolchains like [Compound Engineering](https://github.com/EveryInc/compound-engineering-plugin) get the benefit of purpose-built context, documented decisions, and explicit conventions. Codebase Oracle lets older repositories gain similar benefits by deriving that context from their existing history.
+
 ## The Solution
 
 Codebase Oracle traverses your commit history and extracts the decisions that matter. It identifies architectural pivots, bug patterns, abandoned approaches, and emerging conventions—then organizes them into documentation that Claude can access when relevant.
