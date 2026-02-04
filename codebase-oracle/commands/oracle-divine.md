@@ -1,6 +1,11 @@
-# Mine Repository History
+---
+name: oracle:divine
+description: Divine institutional knowledge from the complete git history
+---
 
-Mine the complete git history of this repository to extract institutional knowledge.
+# Divine Repository History
+
+Channel the oracle to divine institutional knowledge from this repository's complete git history.
 
 This command performs a full traversal of the commit history, identifies significant patterns, and generates:
 - Historical documentation in `docs/history/`
@@ -43,4 +48,4 @@ When complete, you will have:
 - Large repositories may take significant time to process
 - Progress updates will be shown periodically
 - Processing can be resumed if interrupted (checkpoint saved)
-- Run `/oracle:update` after initial mining to process new commits
+- Run `/oracle:renew` after initial mining to process new commits

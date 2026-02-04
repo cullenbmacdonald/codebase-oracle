@@ -1,6 +1,11 @@
-# Update Repository History
+---
+name: oracle:renew
+description: Renew the oracle's knowledge with recent commits
+---
 
-Process new commits since the last mining run and update historical documentation.
+# Renew the Oracle's Knowledge
+
+Renew the oracle's wisdom by processing commits since the last divination.
 
 This is an incremental update that:
 - Reads the checkpoint from the last mining run
@@ -9,7 +14,7 @@ This is an incremental update that:
 
 ## Prerequisites
 
-- Must have run `/oracle:mine` at least once
+- Must have run `/oracle:divine` at least once
 - Checkpoint file must exist at `.claude/oracle-checkpoint.json`
 - New commits must exist since last run
 
@@ -46,7 +51,7 @@ Task history-miner("Update the historical documentation with new commits. Read t
 
 ## Notes
 
-- Much faster than full `/oracle:mine` run
+- Much faster than full `/oracle:divine` run
 - Only processes delta since last checkpoint
 - Safe to run frequently
-- If checkpoint is missing, suggest running `/oracle:mine` instead
+- If checkpoint is missing, suggest running `/oracle:divine` instead

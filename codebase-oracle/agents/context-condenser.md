@@ -148,7 +148,7 @@ See `docs/history/2024-05-api-client-refactor.md` for full context.
 - **Testing:** Co-locate tests in `__tests__/` directories.
 
 ---
-*For detailed history, run `/history <topic>` or see `docs/history/index.yaml`*
+*For detailed history, run `/oracle:consult <topic>` or see `docs/history/index.yaml`*
 ```
 
 ## Condensation Process

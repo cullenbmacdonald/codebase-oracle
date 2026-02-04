@@ -9,36 +9,36 @@ A Claude Code plugin that mines git commit history to produce smarter skills, ag
 
 ## Commands
 
-### `/oracle:mine`
+### `/oracle:divine`
 
 Perform a full mining of the repository's git history. This traverses all commits from oldest to newest, identifies significant patterns, and generates documentation.
 
 ```
-/oracle:mine
+/oracle:divine
 ```
 
 **Output:**
-- `docs/history/*.md` - Detailed documentation for each significant pattern
-- `docs/history/index.yaml` - Routing index for on-demand retrieval
+- `docs/oracle:consult/*.md` - Detailed documentation for each significant pattern
+- `docs/oracle:consult/index.yaml` - Routing index for on-demand retrieval
 - Updated `CLAUDE.md` - Critical patterns section added
 - `.claude/oracle-checkpoint.json` - Progress marker
 
-### `/oracle:update`
+### `/oracle:renew`
 
 Incrementally update historical documentation with new commits since the last run.
 
 ```
-/oracle:update
+/oracle:renew
 ```
 
-### `/history <topic>`
+### `/oracle:consult <topic>`
 
 Query historical context for a specific topic or file.
 
 ```
-/history auth          # Search by keyword
-/history --file src/auth/login.ts  # Search by file path
-/history --list        # List all available topics
+/oracle:consult auth          # Search by keyword
+/oracle:consult --file src/auth/login.ts  # Search by file path
+/oracle:consult --list        # List all available topics
 ```
 
 ## How It Works
@@ -46,7 +46,7 @@ Query historical context for a specific topic or file.
 ### Tiered Documentation
 
 1. **CLAUDE.md** (always loaded) - Critical patterns, gotchas, conventions
-2. **docs/history/** (on-demand) - Detailed historical documentation
+2. **docs/oracle:consult/** (on-demand) - Detailed historical documentation
 3. **git log** (never bulk-loaded) - Raw commits for reference
 
 ### Significance Detection
@@ -75,9 +75,9 @@ codebase-oracle/
 │   ├── significance-judge.md     # Evaluates commit significance
 │   └── context-condenser.md      # Writes documentation
 ├── commands/
-│   ├── oracle-mine.md            # /oracle:mine
-│   ├── oracle-update.md          # /oracle:update
-│   └── history.md                # /history <topic>
+│   ├── oracle-mine.md            # /oracle:divine
+│   ├── oracle-update.md          # /oracle:renew
+│   └── history.md                # /oracle:consult <topic>
 ├── skills/
 │   └── git-history/
 │       ├── SKILL.md              # History mining knowledge

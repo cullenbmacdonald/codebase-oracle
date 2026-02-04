@@ -40,7 +40,7 @@ Detailed historical documentation loaded when relevant:
 Loaded via:
 - Keyword matching in user queries
 - File-based routing when editing related files
-- Explicit `/history <topic>` command
+- Explicit `/oracle:consult <topic>` command
 
 ### Tier 3: Raw (git log)
 
@@ -53,7 +53,7 @@ The original commits, available but never bulk-loaded:
 
 ### Initial Mining
 
-1. User runs `/oracle:mine`
+1. User runs `/oracle:divine`
 2. history-miner agent traverses commits oldest-first
 3. significance-judge evaluates each commit
 4. context-condenser writes docs when context accumulates
@@ -61,7 +61,7 @@ The original commits, available but never bulk-loaded:
 
 ### Incremental Updates
 
-1. User runs `/oracle:update`
+1. User runs `/oracle:renew`
 2. Checkpoint tells us last processed commit
 3. Only new commits since checkpoint are processed
 4. Index and CLAUDE.md updated incrementally

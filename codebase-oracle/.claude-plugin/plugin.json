@@ -1,12 +1,8 @@
 {
   "name": "codebase-oracle",
   "version": "0.1.0",
-  "description": "Mine git commit history to produce smarter skills, agents, and CLAUDE.md files that understand why a codebase evolved",
+  "description": "Mine git commit history to extract institutional knowledge",
   "author": {
     "name": "Compound Engineering"
-  },
-  "commands": "./commands",
-  "agents": "./agents",
-  "skills": "./skills",
-  "hooks": "./hooks/hooks.json"
+  }
 }

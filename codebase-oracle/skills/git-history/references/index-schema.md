@@ -168,7 +168,7 @@ entries:
 
 ### Explicit Command
 
-`/history <topic>`:
+`/oracle:consult <topic>`:
 1. Search keywords for matches to `<topic>`
 2. Also search summaries for substring match
 3. Load matching docs
