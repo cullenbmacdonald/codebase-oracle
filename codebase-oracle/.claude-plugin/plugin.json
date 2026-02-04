@@ -1,0 +1,8 @@
+{
+  "name": "codebase-oracle",
+  "version": "0.1.0",
+  "description": "Mine git commit history to extract institutional knowledge",
+  "author": {
+    "name": "Compound Engineering"
+  }
+}
