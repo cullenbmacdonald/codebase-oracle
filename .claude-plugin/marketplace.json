@@ -1,0 +1,18 @@
+{
+  "name": "codebase-oracle-marketplace",
+  "owner": {
+    "name": "Cullen MacDonald",
+    "url": "https://github.com/cullenbmacdonald"
+  },
+  "plugins": [
+    {
+      "name": "codebase-oracle",
+      "source": "./codebase-oracle",
+      "description": "Mine git commit history to extract institutional knowledge. Helps legacy repos catch up to AI-native codebases.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Cullen MacDonald"
+      }
+    }
+  ]
+}
