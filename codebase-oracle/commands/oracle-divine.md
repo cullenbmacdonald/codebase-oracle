@@ -11,6 +11,15 @@ Channel the oracle to divine institutional knowledge from this repository's comp
 
 **CALIBRATION: For a mature repo, expect to document A LOT. A 6-year repo with 17k commits should yield 50-100+ history docs, not 12. When in doubt, document it. False positives are fine - false negatives mean lost institutional knowledge.**
 
+**PHILOSOPHY: Don't summarize history. Recreate the documentation that WOULD EXIST if the team had been using compound-engineering from the beginning.**
+
+Instead of "In 2023, we migrated to JWT," produce:
+- A `docs/solutions/` entry about the JWT authentication pattern
+- A gotcha doc about session migration edge cases
+- A learning about why cookies didn't scale
+
+Write documents as if you're the engineer who just finished the work and is documenting it for the next person. Use present tense for patterns that still apply. Be specific and actionable, not historical and summarizing.
+
 ## Step 1: Announce and Count
 
 First, tell the user what you're doing and count commits:
@@ -96,34 +105,139 @@ As you find significant commits, group them by:
 
 **Target: For 17k commits, aim for 50-100 history docs minimum.**
 
-## Step 5: Write Documentation
+## Step 5: Write Documentation (Compound-Engineering Style)
 
 Create `docs/history/` directory if needed:
 ```bash
 mkdir -p docs/history
 ```
 
-Write markdown files for each significant theme. **Use commit dates from git, not inferred dates.**
+**Write documents as if you're the engineer who just finished the work.** Not historical summaries, but actionable documentation that would exist if the team had been documenting all along.
 
-Format:
+### Document Types to Create:
+
+**Solutions/Patterns** (how we do things):
 ```markdown
 ---
-date: 2023-01-17
-category: architectural_pivot
-commits: [abc1234, def5678]
+title: JWT Authentication
+category: authentication
+tags: [jwt, auth, tokens, security]
+source_commits: [abc1234, def5678]
 ---
 
-# Authentication System Introduction
+# JWT Authentication
 
-**Commits:** abc1234 (2023-01-17), def5678 (2023-01-18)
-**Authors:** Jane Dev, John Dev
+## Overview
+We use JWT tokens for API authentication. Tokens are issued on login and validated on each request.
 
-## What Changed
-[Description based on the diffs]
+## Implementation
+[Specific details from the code]
 
-## Why It Matters
-[Institutional knowledge extracted]
+## Gotchas
+- Tokens must be refreshed before expiry, not after
+- Always validate the `aud` claim
+- Store refresh tokens securely, not in localStorage
+
+## Related Files
+- `app/services/auth/jwt_service.rb`
+- `app/middleware/authenticate.rb`
 ```
+
+**Learnings** (things we discovered the hard way):
+```markdown
+---
+title: Cookie Sessions Don't Scale
+category: learning
+tags: [sessions, scaling, cookies]
+source_commits: [ghi789]
+discovered: 2023-03-15
+---
+
+# Cookie Sessions Don't Scale Past 10K Concurrent Users
+
+## The Problem
+We hit session storage limits when traffic spiked during the product launch.
+
+## What We Tried
+- Sticky sessions (didn't help with deploys)
+- Redis session store (added latency)
+
+## What Worked
+Migrated to stateless JWT tokens. See `docs/history/jwt-authentication.md`.
+
+## Symptoms
+- Random logouts during high traffic
+- Session store timeouts in logs
+```
+
+**Removals/Deprecations** (what we stopped doing and why):
+```markdown
+---
+title: GraphQL API Removal
+category: abandoned
+tags: [graphql, api, rest]
+source_commits: [jkl012, mno345]
+removed: 2024-06-01
+---
+
+# Why We Removed the GraphQL API
+
+## What It Was
+Experimental GraphQL endpoint at `/graphql` for mobile clients.
+
+## Why We Removed It
+- N+1 query problems were hard to solve
+- Caching was complex
+- Mobile team preferred REST with specific endpoints
+
+## Migration Path
+All mobile clients now use `/api/v2/` REST endpoints.
+
+## Don't Repeat This
+If considering GraphQL again, solve the N+1 problem first.
+```
+
+**Conventions** (how we name/structure things):
+```markdown
+---
+title: Service Object Pattern
+category: convention
+tags: [services, patterns, ruby]
+source_commits: [pqr678]
+established: 2022-08-10
+---
+
+# Service Object Convention
+
+## Pattern
+All business logic goes in `app/services/`. One public method: `call`.
+
+## Naming
+`{Verb}{Noun}Service` - e.g., `CreateUserService`, `ProcessPaymentService`
+
+## Structure
+\`\`\`ruby
+class CreateUserService
+  def initialize(params)
+    @params = params
+  end
+
+  def call
+    # All logic here
+  end
+end
+\`\`\`
+
+## Why This Pattern
+Keeps controllers thin, logic testable, dependencies explicit.
+```
+
+### Key Principles:
+- **Present tense** for things that still apply
+- **Specific and actionable**, not vague summaries
+- **Include code examples** when relevant
+- **Link to actual files** in the codebase
+- **Cite source commits** but don't make the doc ABOUT the commits
 
 ## Step 6: Create Index
 

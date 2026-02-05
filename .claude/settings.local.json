@@ -11,7 +11,8 @@
       "Bash(chmod:*)",
       "Bash(gh pr create --title \"feat: Add Codebase Oracle plugin for git history mining\" --body \"$\\(cat <<''EOF''\n## Summary\n\nCodebase Oracle is a Claude Code plugin that mines git commit history to produce smarter skills, agents, and CLAUDE.md files that understand *why* a codebase evolved—not just its current state.\n\n### Problem\n\nCurrent tooling that generates Claude files analyzes static code and misses critical institutional knowledge:\n- Why was this architecture chosen?\n- What approaches were tried and abandoned?\n- When did conventions emerge and why?\n- Which bugs recur and how were they fixed?\n\n### Solution\n\nA Claude Code plugin that extracts this knowledge from commit history using:\n\n- **history-miner agent** - Traverses commits oldest-first\n- **significance-judge agent** - Evaluates each commit for institutional knowledge value\n- **context-condenser agent** - Writes documentation and routing index\n\n### Features\n\n- Automatic workflow detection \\(merge, squash, rebase\\)\n- LLM-based significance detection for commits\n- Tiered documentation \\(CLAUDE.md + on-demand history docs\\)\n- Incremental updates via checkpoint system\n- On-demand retrieval via keyword matching, file routing, or `/history` command\n\n### Commands\n\n- `/oracle:mine` - Full history mining\n- `/oracle:update` - Incremental update since last run\n- `/history <topic>` - Query historical context\n\n## Testing\n\n- Plugin structure follows Claude Code conventions\n- Scripts tested for workflow detection\n- Ready for integration testing on real repositories\n\n---\n\n[![Compound Engineered]\\(https://img.shields.io/badge/Compound-Engineered-6366f1\\)]\\(https://github.com/EveryInc/compound-engineering-plugin\\) \n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n\\)\")",
       "Bash(git branch:*)",
-      "Bash(gh repo edit:*)"
+      "Bash(gh repo edit:*)",
+      "Bash(git push:*)"
     ]
   }
 }
