@@ -239,6 +239,71 @@ Keeps controllers thin, logic testable, dependencies explicit.
 - **Link to actual files** in the codebase
 - **Cite source commits** but don't make the doc ABOUT the commits
 
+### Updating Docs as History Unfolds
+
+As you process commits chronologically, you'll encounter changes to things you've already documented. **Update the docs, but preserve history.**
+
+**When a pattern changes:**
+```markdown
+---
+title: Authentication Approach
+status: current
+supersedes: docs/history/cookie-sessions.md
+---
+
+# JWT Authentication (Current)
+
+[Current approach details...]
+
+## History
+- **2024-03**: Migrated from cookie sessions due to scaling issues
+- **2022-01**: Originally implemented cookie-based sessions
+
+See also: [Cookie Sessions (Deprecated)](cookie-sessions.md)
+```
+
+**When something is removed/deprecated:**
+Don't delete the doc. Add a status and keep it as a record:
+```markdown
+---
+title: GraphQL API
+status: removed
+removed_date: 2024-06-01
+removed_in: [commit_sha]
+---
+
+# GraphQL API (Removed)
+
+> **Status:** This feature was removed in June 2024. See [Why We Removed GraphQL](#why-removed).
+
+[Original documentation preserved...]
+
+## Why Removed
+[Explanation from the removal commits]
+
+## What Replaced It
+REST API v2. See [REST API docs](rest-api-v2.md).
+```
+
+**When a convention evolves:**
+Show the evolution, don't erase the old way:
+```markdown
+## Naming Convention
+
+**Current (2024+):** `{Verb}{Noun}Service` - e.g., `CreateUserService`
+
+**Previous (2022-2024):** `{Noun}{Verb}er` - e.g., `UserCreator`
+
+We changed because [reason]. Old code may still use the previous convention.
+```
+
+### Never Lose:
+- When something was introduced
+- When something was changed and why
+- When something was removed and why
+- What we learned from failures
+- Links between related docs (supersedes, replaced-by, see-also)
+
 ## Step 6: Create Index
 
 Write `docs/history/index.yaml`:
