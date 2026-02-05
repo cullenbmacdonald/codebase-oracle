@@ -5,7 +5,7 @@
       "hooks": [
         {
           "type": "command",
-          "command": "bash -c 'if [ -f docs/history/index.yaml ]; then cat docs/history/index.yaml; else echo \"No history index found. Run /oracle:mine to generate.\"; fi'",
+          "command": "bash -c 'if [ -f docs/oracle/index.yaml ]; then cat docs/oracle/index.yaml; else echo \"No history index found. Run /oracle:mine to generate.\"; fi'",
           "timeout": 5
         }
       ]

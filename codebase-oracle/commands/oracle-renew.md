@@ -44,8 +44,8 @@ Task history-miner("Update the historical documentation with new commits. Read t
 
 ## Output
 
-- Updated `docs/history/*.md` - New docs if significant patterns found
-- Updated `docs/history/index.yaml` - New entries added
+- Updated `docs/oracle/*.md` - New docs if significant patterns found
+- Updated `docs/oracle/index.yaml` - New entries added
 - Updated `CLAUDE.md` - Critical patterns refreshed if needed
 - Updated `.claude/oracle-checkpoint.json` - New progress marker
 

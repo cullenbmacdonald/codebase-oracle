@@ -107,9 +107,9 @@ As you find significant commits, group them by:
 
 ## Step 5: Write Documentation (Compound-Engineering Style)
 
-Create `docs/history/` directory if needed:
+Create `docs/oracle/` directory if needed:
 ```bash
-mkdir -p docs/history
+mkdir -p docs/oracle
 ```
 
 **Write documents as if you're the engineer who just finished the work.** Not historical summaries, but actionable documentation that would exist if the team had been documenting all along.
@@ -163,7 +163,7 @@ We hit session storage limits when traffic spiked during the product launch.
 - Redis session store (added latency)
 
 ## What Worked
-Migrated to stateless JWT tokens. See `docs/history/jwt-authentication.md`.
+Migrated to stateless JWT tokens. See `docs/oracle/jwt-authentication.md`.
 
 ## Symptoms
 - Random logouts during high traffic
@@ -248,7 +248,7 @@ As you process commits chronologically, you'll encounter changes to things you'v
 ---
 title: Authentication Approach
 status: current
-supersedes: docs/history/cookie-sessions.md
+supersedes: docs/oracle/cookie-sessions.md
 ---
 
 # JWT Authentication (Current)
@@ -306,7 +306,7 @@ We changed because [reason]. Old code may still use the previous convention.
 
 ## Step 6: Create Index
 
-Write `docs/history/index.yaml`:
+Write `docs/oracle/index.yaml`:
 ```yaml
 version: 1
 generated: [current timestamp]
@@ -329,7 +329,7 @@ Add or update a "Historical Context" section in CLAUDE.md with the most critical
 [Oracle] Divination complete!
 - Commits analyzed: 500
 - Significant patterns: 12
-- Docs written: docs/history/
+- Docs written: docs/oracle/
 - CLAUDE.md updated
 ```
 

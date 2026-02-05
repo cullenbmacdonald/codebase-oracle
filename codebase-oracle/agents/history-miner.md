@@ -147,7 +147,7 @@ For EACH commit (do not skip):
 
 After processing all commits:
 1. Invoke context-condenser with remaining findings
-2. Generate/update `docs/history/index.yaml`
+2. Generate/update `docs/oracle/index.yaml`
 3. Update CLAUDE.md with critical patterns section
 4. Write final checkpoint
 

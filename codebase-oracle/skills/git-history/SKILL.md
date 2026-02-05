@@ -30,7 +30,7 @@ Critical patterns that affect everyday development:
 
 Size target: < 500 words in the Historical Context section.
 
-### Tier 2: On-Demand (docs/history/)
+### Tier 2: On-Demand (docs/oracle/)
 
 Detailed historical documentation loaded when relevant:
 - Full context for architectural decisions

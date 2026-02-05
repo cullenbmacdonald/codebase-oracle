@@ -1,6 +1,6 @@
 # Index Schema
 
-The routing index at `docs/history/index.yaml` enables on-demand loading of historical documentation.
+The routing index at `docs/oracle/index.yaml` enables on-demand loading of historical documentation.
 
 ## Schema Definition
 
@@ -19,7 +19,7 @@ total_docs: 12
 
 # Array of document entries
 entries:
-  - file: string           # Filename in docs/history/
+  - file: string           # Filename in docs/oracle/
     keywords: [string]     # Terms for keyword matching
     paths: [string]        # Glob patterns for file routing
     commits: [string]      # SHA references (short form)
@@ -31,7 +31,7 @@ entries:
 
 ### `file`
 
-The markdown filename within `docs/history/`.
+The markdown filename within `docs/oracle/`.
 
 Format: `YYYY-MM-topic-slug.md`
 
@@ -187,7 +187,7 @@ When new history docs are added:
 ### Rebuild
 
 If index is corrupted or missing:
-1. Glob `docs/history/*.md`
+1. Glob `docs/oracle/*.md`
 2. Parse frontmatter from each file
 3. Build entries from frontmatter fields
 4. Write fresh index

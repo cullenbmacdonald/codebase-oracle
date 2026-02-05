@@ -7,7 +7,7 @@ description: |
   <example>
   Context: History miner has accumulated significant findings
   user: "Condense the current findings into documentation"
-  assistant: Uses context-condenser to write docs/history/*.md files
+  assistant: Uses context-condenser to write docs/oracle/*.md files
   </example>
 
   <example>
@@ -29,13 +29,13 @@ You are responsible for transforming accumulated commit analysis into structured
 ## Core Responsibilities
 
 1. **Write History Documents** - Create detailed markdown files for significant patterns
-2. **Generate Routing Index** - Build `docs/history/index.yaml` for keyword/file routing
+2. **Generate Routing Index** - Build `docs/oracle/index.yaml` for keyword/file routing
 3. **Update CLAUDE.md** - Append critical patterns section
 4. **Preserve Information** - Ensure no important context is lost during condensation
 
 ## Output Formats
 
-### History Document (`docs/history/YYYY-MM-topic-slug.md`)
+### History Document (`docs/oracle/YYYY-MM-topic-slug.md`)
 
 ```markdown
 ---
@@ -91,7 +91,7 @@ The reasoning behind this decision:
 - Issue #100: "Session scaling problems"
 ```
 
-### Routing Index (`docs/history/index.yaml`)
+### Routing Index (`docs/oracle/index.yaml`)
 
 ```yaml
 version: 1
@@ -132,15 +132,15 @@ Append to existing CLAUDE.md (preserve all existing content):
 ### Critical Patterns
 
 **Authentication:** Uses JWT tokens (migrated from sessions in 2024 due to scaling).
-See `docs/history/2024-03-auth-migration.md` for full context.
+See `docs/oracle/2024-03-auth-migration.md` for full context.
 
 **API Client:** Custom fetch wrapper with exponential backoff retry.
-See `docs/history/2024-05-api-client-refactor.md` for full context.
+See `docs/oracle/2024-05-api-client-refactor.md` for full context.
 
 ### Gotchas
 
 - **Race condition in checkout:** Always await cart.save() before redirect.
-  See `docs/history/2024-07-checkout-race-fix.md`.
+  See `docs/oracle/2024-07-checkout-race-fix.md`.
 
 ### Conventions
 
@@ -148,7 +148,7 @@ See `docs/history/2024-05-api-client-refactor.md` for full context.
 - **Testing:** Co-locate tests in `__tests__/` directories.
 
 ---
-*For detailed history, run `/oracle:consult <topic>` or see `docs/history/index.yaml`*
+*For detailed history, run `/oracle:consult <topic>` or see `docs/oracle/index.yaml`*
 ```
 
 ## Condensation Process
@@ -180,7 +180,7 @@ For each theme with 1+ significant commits:
 
 ### 4. Build/Update Index
 
-Read existing `docs/history/index.yaml` if present:
+Read existing `docs/oracle/index.yaml` if present:
 - Merge new entries
 - Update `generated` timestamp
 - Update `last_commit`
@@ -211,7 +211,7 @@ Read existing CLAUDE.md:
 Ensure directories exist before writing:
 
 ```bash
-mkdir -p docs/history
+mkdir -p docs/oracle
 ```
 
 ## File Naming
