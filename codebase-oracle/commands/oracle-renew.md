@@ -9,11 +9,6 @@ Renew the oracle's wisdom by processing commits since the last divination.
 
 **IMPORTANT: Execute inline. Do NOT launch a background agent.**
 
-## Prerequisites
-
-- Must have run `/oracle:divine` at least once
-- Checkpoint file must exist at `.claude/oracle-checkpoint.json`
-
 ---
 
 ## Step 1: Check Checkpoint
@@ -22,46 +17,55 @@ Renew the oracle's wisdom by processing commits since the last divination.
 cat .claude/oracle-checkpoint.json
 ```
 
-If the checkpoint doesn't exist, tell the user:
-"No checkpoint found. Run `/oracle:divine` first to perform initial history mining."
+If missing, tell the user: "No checkpoint found. Run `/oracle:divine` first."
 
-Extract the `last_commit` SHA from the checkpoint.
+Extract the `last_commit` SHA.
 
 ---
 
-## Step 2: Generate New Candidates
+## Step 2: Find New Candidates
 
-Run the filter script with the `--since` flag:
+Run the same queries as `/oracle:divine`, but with a range. For each query, add `<last_commit>..HEAD`:
 
+### Deletions since checkpoint
 ```bash
-bash scripts/filter-candidates.sh --since <last_commit_sha>
+git log --diff-filter=D --format='%H|%aI|%s' --reverse <last_commit>..HEAD
 ```
 
-Or if installed as a plugin:
+### Large changes since checkpoint
 ```bash
-bash .claude-plugin/scripts/filter-candidates.sh --since <last_commit_sha>
+git log --format='%H|%aI|%s' --reverse <last_commit>..HEAD | while read line; do
+  sha=$(echo "$line" | cut -d'|' -f1)
+  count=$(git show --stat --format='' "$sha" 2>/dev/null | grep -c '|' || echo 0)
+  [ "$count" -ge 10 ] && echo "$line"
+done
 ```
 
-This creates `docs/oracle/.candidates.json` with only commits since the checkpoint.
+### Keyword matches since checkpoint
+```bash
+git log --grep='refactor\|migrate\|remove\|deprecate\|breaking\|security\|revert\|upgrade\|rename\|restructure\|overhaul\|rewrite\|introduce' -i -E --format='%H|%aI|%s' --reverse <last_commit>..HEAD
+```
 
-If no candidates found, tell the user:
-"No significant commits since last divination. History is up to date."
+### Config changes since checkpoint
+```bash
+git log --format='%H|%aI|%s' --reverse <last_commit>..HEAD -- '*.yml' '*.yaml' 'Gemfile*' 'package*.json' '**/schema*' '**/migration*' 'config/**'
+```
+
+Combine and deduplicate.
+
+If no candidates: "No significant commits since last divination. History is up to date."
 
 ---
 
 ## Step 3: Process New Candidates
 
-Follow the same process as `/oracle:divine` Phase 2:
-
-1. Read the candidates file
-2. For each candidate, show progress
-3. Create new docs or update existing ones
-4. Show what's being documented
+Follow `/oracle:divine` Phase 2:
+- Show progress for each candidate
+- Create new docs or update existing ones
 
 ```
 [Oracle] Renewing with 12 new candidates...
-[Oracle] 1/12: abc1234 (2024-02-01) "Add caching layer" [keyword] → DOCUMENTING
-[Oracle] 2/12: def5678 (2024-02-02) "Fix race condition" [keyword] → DOCUMENTING
+[Oracle] 1/12: abc1234 (2024-02-01) "Add caching layer" → DOCUMENTING
 ```
 
 ---
@@ -78,22 +82,12 @@ Merge new entries into `docs/oracle/index.yaml`:
 
 ## Step 5: Update Checkpoint
 
-Update `.claude/oracle-checkpoint.json`:
-
 ```json
 {
-  "last_commit": "[newest SHA processed]",
-  "last_run": "[current timestamp]",
+  "last_commit": "[newest SHA]",
+  "last_run": "[timestamp]",
   "docs_created": [total count]
 }
-```
-
----
-
-## Step 6: Clean Up
-
-```bash
-rm docs/oracle/.candidates.json
 ```
 
 ---
@@ -107,12 +101,3 @@ rm docs/oracle/.candidates.json
 - Docs updated: 1
 - Checkpoint updated
 ```
-
----
-
-## When to Run
-
-- After pulling new changes from remote
-- Before starting work on unfamiliar areas
-- Periodically to stay current
-- Much faster than full `/oracle:divine`

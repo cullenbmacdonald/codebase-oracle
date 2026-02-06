@@ -93,10 +93,10 @@ When you find something significant, briefly scan your accumulated findings to s
 
 ### Step 1: Get ALL Commits
 
-Get the complete commit list (no filtering):
+Get the complete commit list:
 
 ```bash
-${CLAUDE_PLUGIN_ROOT}/scripts/get-commits.sh
+git log --reverse --format='%H|%P|%aI|%an|%s'
 ```
 
 This returns ALL commits in oldest-first order:
@@ -104,7 +104,10 @@ This returns ALL commits in oldest-first order:
 SHA|PARENT_SHA|DATE|AUTHOR|MESSAGE
 ```
 
-For incremental updates, use `--since <sha>` to get only new commits.
+For incremental updates, use a range to get only new commits:
+```bash
+git log --reverse --format='%H|%P|%aI|%an|%s' <last_commit>..HEAD
+```
 
 ### Step 2: Load Checkpoint (if exists)
 
