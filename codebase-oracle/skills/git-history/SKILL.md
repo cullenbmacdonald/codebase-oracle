@@ -1,81 +1,81 @@
 ---
 name: git-history
 description: |
-  Knowledge and workflows for mining git commit history to extract institutional knowledge.
+  Knowledge and workflows for divining wisdom from git commit history.
   Use this skill when you need to understand why a codebase evolved, not just what it contains.
 ---
 
-# Git History Mining
+# The Art of Divination
 
-This skill provides knowledge for extracting institutional knowledge from git repositories—the "why" behind code decisions that static analysis misses.
+This skill provides knowledge for extracting institutional wisdom from git repositories—the "why" behind code decisions that static analysis misses.
 
-## Core Concept
+## The Oracle's Purpose
 
 Current Claude file generators analyze code as it exists now. They miss:
-- **Architectural pivots** - Why was this approach chosen over alternatives?
-- **Bug patterns** - What gotchas have been discovered?
-- **Abandoned approaches** - What was tried and didn't work?
-- **Convention emergence** - How did patterns evolve?
+- **Sacred Patterns** - Why was this approach chosen over alternatives?
+- **Hard-Won Wisdom** - What gotchas have been discovered through tribulation?
+- **Abandoned Paths** - What was tried and didn't work?
+- **The Old Ways** - How did conventions emerge and evolve?
 
-Codebase Oracle mines commit history to capture this context.
+The Codebase Oracle divines commit history to capture this ancient knowledge.
 
-## Tiered Documentation Model
+## The Tiered Codex
 
-### Tier 1: Always Loaded (CLAUDE.md)
+### Tier 1: Always Present (CLAUDE.md)
 
-Critical patterns that affect everyday development:
+Critical wisdom that affects everyday development:
 - Key architectural decisions (1-2 sentences each)
-- Active gotchas and warnings
+- Active warnings and gotchas
 - Current conventions
 
-Size target: < 500 words in the Historical Context section.
+Size target: < 500 words in the Wisdom of the Ancients section.
 
 ### Tier 2: On-Demand (docs/oracle/)
 
-Detailed historical documentation loaded when relevant:
+Detailed prophecies loaded when relevant:
 - Full context for architectural decisions
 - Complete bug analysis and fixes
 - Detailed migration stories
 
-Loaded via:
-- Keyword matching in user queries
-- File-based routing when editing related files
+Summoned via:
+- Keyword matching in seeker queries
+- File-based routing when editing related artifacts
 - Explicit `/oracle:consult <topic>` command
 
-### Tier 3: Raw (git log)
+### Tier 3: Raw Runes (git log)
 
 The original commits, available but never bulk-loaded:
-- Referenced by SHA in history docs
+- Referenced by SHA in prophecies
 - Can be inspected for full diff details
-- Source of truth when docs need updating
+- Source of truth when prophecies need updating
 
-## Workflows
+## The Sacred Workflows
 
-### Initial Mining
+### Initial Divination
 
-1. User runs `/oracle:divine`
-2. history-miner agent traverses commits oldest-first
-3. significance-judge evaluates each commit
-4. context-condenser writes docs when context accumulates
-5. Final index and CLAUDE.md section generated
+1. Seeker invokes `/oracle:divine`
+2. Rune-reader agent traverses commits oldest-first
+3. Vision-judge evaluates each commit for wisdom
+4. Codex-scribe inscribes prophecies when visions accumulate
+5. Final index and CLAUDE.md wisdom section generated
 
-### Incremental Updates
+### Renewal of Knowledge
 
-1. User runs `/oracle:renew`
-2. Checkpoint tells us last processed commit
-3. Only new commits since checkpoint are processed
-4. Index and CLAUDE.md updated incrementally
+1. Seeker invokes `/oracle:renew`
+2. Bookmark reveals last processed commit
+3. Only new commits since bookmark are divined
+4. Index and CLAUDE.md updated with new wisdom
 
-### On-Demand Retrieval
+### Consulting the Oracle
 
-1. User asks question or edits file
-2. SessionStart hook has loaded routing index
+1. Seeker asks question or edits artifact
+2. SessionStart hook has loaded the index of prophecies
 3. Keywords or file paths matched against index
-4. Relevant history docs loaded into context
-5. Response includes historical context
+4. Relevant prophecies summoned into context
+5. Response includes ancient wisdom
 
 ## References
 
-For detailed specifications, see:
-- `references/significance-criteria.md` - How commits are evaluated
-- `references/index-schema.md` - Routing index format
+For detailed specifications, consult:
+- `references/significance-criteria.md` - How visions are judged
+- `references/index-schema.md` - Index of prophecies format

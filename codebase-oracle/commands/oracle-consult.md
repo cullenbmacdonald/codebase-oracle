@@ -18,86 +18,96 @@ Seek the oracle's wisdom about the history of a topic or area of the codebase.
 
 ## Arguments
 
-- `<topic>` - Keyword to search for (e.g., "auth", "checkout", "api")
-- `--file <path>` - Get history for a specific file path
-- `--list` - Show all available history topics
+- `<topic>` - A word of power to seek (e.g., "auth", "checkout", "api")
+- `--file <path>` - Divine the history of a specific artifact
+- `--list` - Reveal all prophecies in the codex
 
 ## Examples
 
 ```
 /oracle:consult auth
-→ Loads docs/oracle:consult/2024-03-auth-migration.md
+→ The oracle speaks of authentication's journey...
 
 /oracle:consult --file src/checkout/cart.ts
-→ Loads any history docs that match src/checkout/**
+→ The oracle reveals wisdom touching this artifact...
 
 /oracle:consult --list
-→ Shows all entries in the routing index with summaries
+→ The codex contains these prophecies...
 ```
 
-## Process
+## The Ritual
 
-1. **Load Index** - Read `docs/oracle:consult/index.yaml`
-2. **Search** - Find entries matching topic/path
-3. **Load Docs** - Read matching history documents
-4. **Present** - Show relevant historical context
+1. **Open the Codex** - Read `docs/oracle/index.yaml`
+2. **Seek the Relevant** - Find entries matching the seeker's query
+3. **Retrieve the Prophecies** - Read matching wisdom documents
+4. **Speak the Truth** - Present the historical context
 
 ## Execution
 
-### For topic search:
+### For topic seeking:
 
 ```
-Read docs/oracle:consult/index.yaml
+[Oracle] Consulting the codex for wisdom of "{topic}"...
+
+Read docs/oracle/index.yaml
 Search entries for keyword match in 'keywords' array
-For each match, read the corresponding file from docs/oracle:consult/
-Present the historical context to the user
+For each match, read the corresponding prophecy from docs/oracle/
+Present the wisdom to the seeker
 ```
 
-### For file search:
+### For artifact seeking:
 
 ```
-Read docs/oracle:consult/index.yaml
+[Oracle] Divining the history of this artifact...
+
+Read docs/oracle/index.yaml
 For each entry, check if the given path matches any glob in 'paths'
-For each match, read the corresponding file from docs/oracle:consult/
-Present the historical context to the user
+For each match, read the corresponding prophecy from docs/oracle/
+Present the wisdom to the seeker
 ```
 
-### For list:
+### For listing:
 
 ```
-Read docs/oracle:consult/index.yaml
+[Oracle] Revealing the contents of the codex...
+
+Read docs/oracle/index.yaml
 For each entry, display: file, category, summary
-Format as a scannable list
+Format as a scannable scroll
 ```
 
 ## Output Format
 
-When history is found:
+When wisdom is found:
 
 ```
-## Historical Context: [Topic]
+[Oracle] The spirits speak of "{topic}"...
 
-[Content from the history doc]
+## {Title from prophecy}
+
+{Content from the prophecy document}
 
 ---
-Source: docs/oracle:consult/[filename].md
-Related commits: [sha1], [sha2]
+Prophecy source: docs/oracle/{filename}.md
+Anchored to commits: {sha1}, {sha2}
 ```
 
-When no history is found:
+When no wisdom exists:
 
 ```
-No historical context found for "[topic]".
+[Oracle] The waters are dark for "{topic}". No prophecies speak of this.
 
-Available topics (run /oracle:consult --list):
-- auth, authentication, jwt
-- checkout, cart
-- api, graphql
+The codex contains wisdom of:
+  • auth, authentication, jwt
+  • checkout, cart, payment
+  • api, graphql, rest
+
+Seek /oracle:consult --list for all known prophecies.
 ```
 
 ## Notes
 
-- Requires `/oracle:divine` to have been run at least once
-- Multiple matches will show all relevant history docs
-- Use specific terms for better results
-- History docs contain links to original commits for full details
+- Requires `/oracle:divine` to have awakened the oracle first
+- Multiple matches reveal all relevant prophecies
+- Specific words of power yield clearer visions
+- Each prophecy links to original commits for the complete record

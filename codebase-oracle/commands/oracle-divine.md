@@ -11,79 +11,82 @@ Channel the oracle to divine institutional knowledge from this repository's comp
 
 ---
 
-## Phase 1: Gather Candidates (Parallel)
+## Phase 1: Scrying the Repository (Parallel)
+
+Tell the user: `[Oracle] Scrying the repository depths...`
 
 Run these **5 Bash commands in parallel** (all in one message). Each writes to a temp file:
 
 ```bash
-# 1. Commits with deletions
+# 1. Visions of destruction (deletions)
 git log --diff-filter=D --format='%H|%aI|%s' --reverse > /tmp/oracle-deletions.txt
 
-# 2. Large changes (10+ files)
+# 2. Great upheavals (large changes)
 git log --shortstat --format='%H|%aI|%s|' --reverse | awk '/\|$/{info=$0} /files? changed/{if($1>=10) print info}' > /tmp/oracle-large.txt
 
-# 3. Keyword matches
+# 3. Words of power (keyword matches)
 git log --grep='refactor\|migrate\|remove\|deprecate\|breaking\|security\|revert\|upgrade\|rename\|restructure\|overhaul\|rewrite\|introduce' -i -E --format='%H|%aI|%s' --reverse > /tmp/oracle-keywords.txt
 
-# 4. Reverts
+# 4. Paths not taken (reverts)
 git log --grep='^Revert' --format='%H|%aI|%s' --reverse > /tmp/oracle-reverts.txt
 
-# 5. Config/schema changes
+# 5. Sacred configurations
 git log --format='%H|%aI|%s' --reverse -- '*.yml' '*.yaml' 'Gemfile*' 'package*.json' 'Cargo.toml' 'go.mod' 'requirements*.txt' '**/schema*' '**/migration*' 'config/**' 'db/migrate/**' > /tmp/oracle-config.txt
 ```
 
 **Call all 5 Bash commands in a single message** so they run in parallel.
 
-### Combine Results
+### Gathering the Visions
 
 After all 5 complete, run:
 
 ```bash
-cat /tmp/oracle-*.txt | cut -d'|' -f1-3 | sort -t'|' -k2 -u | sort -t'|' -k1 -u > /tmp/oracle-candidates.txt && wc -l < /tmp/oracle-candidates.txt
+cat /tmp/oracle-*.txt | cut -d'|' -f1-3 | sort -t'|' -k2 -u | sort -t'|' -k1 -u > /tmp/oracle-visions.txt && wc -l < /tmp/oracle-visions.txt
 ```
 
-This deduplicates by SHA and sorts by date. Read the combined file:
+Read the combined file:
 
 ```bash
-cat /tmp/oracle-candidates.txt
+cat /tmp/oracle-visions.txt
 ```
 
-Tell the user: "Phase 1 complete. Found X unique candidates."
+Tell the user: `[Oracle] The scrying reveals X visions from the past...`
 
 ---
 
-## Phase 2: Process Candidates
+## Phase 2: Reading the Runes
 
-**For each candidate, show progress:**
+**For each vision, show progress:**
 
 ```
-[Oracle] 1/150: abc1234 (2023-01-15) "Remove legacy auth" → evaluating...
-[Oracle] 2/150: def5678 (2023-01-16) "Migrate to JWT" → DOCUMENTING
+[Oracle] Reading rune 1/150: abc1234 "Remove legacy auth" — examining...
+[Oracle] Reading rune 2/150: def5678 "Migrate to JWT" — a prophecy emerges!
+[Oracle] Inscribing prophecy: JWT Authentication
 ```
 
-**For candidates worth documenting, get context:**
+**For visions worth documenting, consult the full record:**
 
 ```bash
 git show --stat <sha>
-git show <sha>  # full diff if needed
+git show <sha>  # the complete vision if needed
 ```
 
-### What to Document
+### What Prophecies to Record
 
-**CALIBRATION:** Document liberally. 500 candidates should yield 50-100+ docs. False positives are fine.
+**CALIBRATION:** The oracle speaks liberally. 500 visions should yield 50-100+ prophecies. False visions are acceptable—lost knowledge is not.
 
-**PHILOSOPHY:** Don't summarize history. Produce documentation that WOULD EXIST if the team had used compound-engineering from the start.
+**PHILOSOPHY:** Do not merely summarize the past. Inscribe the wisdom that WOULD EXIST had the ancients documented their ways.
 
-**Categories:**
+**Categories of Prophecy:**
 
-- **Solutions/Patterns** - How things are done (auth, database, API design)
-- **Learnings** - Things discovered the hard way (scaling issues, race conditions)
-- **Removals** - What was stopped and why (deprecated features, abandoned experiments)
-- **Conventions** - How things are named/structured
+- **Sacred Patterns** - How things are done (auth, database, API design)
+- **Hard-Won Wisdom** - Lessons from tribulation (scaling woes, race conditions)
+- **Abandoned Paths** - What was forsaken and why (deprecated features, failed experiments)
+- **The Old Ways** - How things are named and structured
 
-### Document Format
+### Prophecy Format
 
-Write as the engineer who just finished the work:
+Write as the engineer who just completed the work:
 
 ```markdown
 ---
@@ -109,18 +112,18 @@ We use JWT tokens for API authentication.
 - `app/services/auth/jwt_service.rb`
 ```
 
-### Update Docs as History Unfolds
+### Updating the Codex
 
-Processing chronologically, update existing docs when patterns change:
-- Mark superseded approaches with `status: superseded`
+As history unfolds chronologically, update existing prophecies:
+- Mark superseded ways with `status: superseded`
 - Add "History" sections showing evolution
-- Set `status: removed` for deprecated features
+- Set `status: abandoned` for forsaken approaches
 
 ---
 
-## Phase 3: Finalize
+## Phase 3: Sealing the Wisdom
 
-### Create Index
+### Create the Index of Prophecies
 
 Write `docs/oracle/index.yaml`:
 
@@ -139,14 +142,14 @@ entries:
 
 ### Update CLAUDE.md
 
-Add a "Historical Context" section:
+Add a "Wisdom of the Ancients" section:
 - Key architectural decisions (1-2 sentences each)
-- Active gotchas and warnings
+- Active warnings and gotchas
 - Current conventions
 
 Keep under 500 words.
 
-### Save Checkpoint
+### Mark the Bookmark
 
 Create `.claude/oracle-checkpoint.json`:
 
@@ -154,7 +157,7 @@ Create `.claude/oracle-checkpoint.json`:
 {
   "last_commit": "[SHA]",
   "last_run": "[timestamp]",
-  "docs_created": [count]
+  "prophecies_recorded": [count]
 }
 ```
 
@@ -163,19 +166,20 @@ Create `.claude/oracle-checkpoint.json`:
 ## Report Completion
 
 ```
-[Oracle] Divination complete!
-- Candidates analyzed: 150
-- Docs written: 47
-- Index: docs/oracle/index.yaml
-- CLAUDE.md updated
+[Oracle] The divination is complete!
+
+  Visions examined: 150
+  Prophecies inscribed: 47
+  Codex location: docs/oracle/
+  CLAUDE.md has received the ancient wisdom
 ```
 
 ---
 
-## Key Principles
+## The Oracle's Principles
 
-1. **Parallel candidate gathering** - Launch 5 agents simultaneously
-2. **Combine and dedupe** - Merge results before processing
-3. **Show progress** - User sees each candidate evaluated
-4. **Dates from git** - Never infer, use commit timestamps
-5. **Document liberally** - False positives fine, false negatives lose knowledge
+1. **Scry in parallel** - Cast all five visions simultaneously
+2. **Gather and distill** - Combine visions before reading
+3. **Show the journey** - Let the seeker witness each rune read
+4. **Honor the timestamps** - Dates come from git, never from inference
+5. **Speak liberally** - False prophecies fade; lost wisdom is gone forever

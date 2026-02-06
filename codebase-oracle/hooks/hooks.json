@@ -5,7 +5,7 @@
       "hooks": [
         {
           "type": "command",
-          "command": "bash -c 'if [ -f docs/oracle/index.yaml ]; then cat docs/oracle/index.yaml; else echo \"No history index found. Run /oracle:mine to generate.\"; fi'",
+          "command": "bash -c 'if [ -f docs/oracle/index.yaml ]; then echo \"[Oracle] The codex awakens...\"; cat docs/oracle/index.yaml; else echo \"[Oracle] No codex found. Seek /oracle:divine to awaken the oracle.\"; fi'",
           "timeout": 5
         }
       ]
