@@ -13,36 +13,42 @@ Channel the oracle to divine institutional knowledge from this repository's comp
 
 ## Phase 1: Gather Candidates (Parallel)
 
-Run these **5 Bash commands in parallel** (all in one message) to gather candidates:
+Run these **5 Bash commands in parallel** (all in one message). Each writes to a temp file:
 
 ```bash
 # 1. Commits with deletions
-git log --diff-filter=D --format='%H|%aI|%s' --reverse
+git log --diff-filter=D --format='%H|%aI|%s' --reverse > /tmp/oracle-deletions.txt
 
 # 2. Large changes (10+ files)
-git log --shortstat --format='%H|%aI|%s|' --reverse | awk '/\|$/{info=$0} /files? changed/{if($1>=10) print info}'
+git log --shortstat --format='%H|%aI|%s|' --reverse | awk '/\|$/{info=$0} /files? changed/{if($1>=10) print info}' > /tmp/oracle-large.txt
 
 # 3. Keyword matches
-git log --grep='refactor\|migrate\|remove\|deprecate\|breaking\|security\|revert\|upgrade\|rename\|restructure\|overhaul\|rewrite\|introduce' -i -E --format='%H|%aI|%s' --reverse
+git log --grep='refactor\|migrate\|remove\|deprecate\|breaking\|security\|revert\|upgrade\|rename\|restructure\|overhaul\|rewrite\|introduce' -i -E --format='%H|%aI|%s' --reverse > /tmp/oracle-keywords.txt
 
 # 4. Reverts
-git log --grep='^Revert' --format='%H|%aI|%s' --reverse
+git log --grep='^Revert' --format='%H|%aI|%s' --reverse > /tmp/oracle-reverts.txt
 
 # 5. Config/schema changes
-git log --format='%H|%aI|%s' --reverse -- '*.yml' '*.yaml' 'Gemfile*' 'package*.json' 'Cargo.toml' 'go.mod' 'requirements*.txt' '**/schema*' '**/migration*' 'config/**' 'db/migrate/**'
+git log --format='%H|%aI|%s' --reverse -- '*.yml' '*.yaml' 'Gemfile*' 'package*.json' 'Cargo.toml' 'go.mod' 'requirements*.txt' '**/schema*' '**/migration*' 'config/**' 'db/migrate/**' > /tmp/oracle-config.txt
 ```
 
 **Call all 5 Bash commands in a single message** so they run in parallel.
 
 ### Combine Results
 
-Once all 5 agents return:
-1. Collect all SHA|DATE|SUBJECT lines
-2. Extract unique SHAs (first field)
-3. Sort by date (second field)
-4. This is your **candidate list**
+After all 5 complete, run:
 
-Tell the user: "Phase 1 complete. Found X unique candidates from parallel scans."
+```bash
+cat /tmp/oracle-*.txt | cut -d'|' -f1-3 | sort -t'|' -k2 -u | sort -t'|' -k1 -u > /tmp/oracle-candidates.txt && wc -l < /tmp/oracle-candidates.txt
+```
+
+This deduplicates by SHA and sorts by date. Read the combined file:
+
+```bash
+cat /tmp/oracle-candidates.txt
+```
+
+Tell the user: "Phase 1 complete. Found X unique candidates."
 
 ---
 
