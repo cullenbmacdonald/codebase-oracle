@@ -10,5 +10,17 @@
         }
       ]
     }
+  ],
+  "PreToolUse": [
+    {
+      "matcher": "Edit|Write",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "python3 -c \"\nimport sys, json, os\ntry:\n    data = json.load(sys.stdin)\nexcept Exception:\n    sys.exit(0)\nfile_path = data.get('file_path', '')\nif not file_path or not os.path.exists('docs/oracle/index.yaml'):\n    sys.exit(0)\ntry:\n    import yaml\nexcept ImportError:\n    sys.exit(0)\nwith open('docs/oracle/index.yaml') as f:\n    idx = yaml.safe_load(f)\nimport fnmatch\nmatches = []\nfor entry in idx.get('entries', []):\n    for pat in entry.get('paths', []):\n        if fnmatch.fnmatch(file_path, pat) or fnmatch.fnmatch(os.path.basename(file_path), pat):\n            matches.append(entry)\n            break\nif not matches:\n    sys.exit(0)\nprint('[Oracle] Ancient wisdom speaks of this artifact:')\nfor entry in matches:\n    print(f\\\"  * {entry.get('summary', entry['file'])}\\\")\n    doc = f\\\"docs/oracle/{entry['file']}\\\"\n    if os.path.exists(doc):\n        print()\n        print(open(doc).read())\n\"",
+          "timeout": 5
+        }
+      ]
+    }
   ]
 }
