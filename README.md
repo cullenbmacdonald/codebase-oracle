@@ -66,7 +66,7 @@ Not everything needs to be in context all the time. Codebase Oracle uses a tiere
 
 **Always loaded:** Critical patterns and active gotchas go directly into your CLAUDE.md. These are the things Claude should never forget.
 
-**On-demand:** Detailed historical documentation lives in `docs/history/`. When you ask about authentication, Claude automatically loads the relevant history. When you edit a file, context about that area appears.
+**On-demand:** Detailed historical documentation lives in `docs/oracle/`. When you ask about authentication, Claude automatically loads the relevant history. When you edit a file, context about that area appears.
 
 **Available but not loaded:** The raw git history remains accessible for deep dives, but doesn't consume context.
 
