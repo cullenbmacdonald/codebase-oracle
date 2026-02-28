@@ -9,6 +9,7 @@ How commits are evaluated for institutional knowledge value.
 Commits that change how the codebase is structured or how components interact.
 
 **Indicators:**
+
 - New directories/modules created
 - Framework or library migrations
 - Design pattern introductions
@@ -16,6 +17,7 @@ Commits that change how the codebase is structured or how components interact.
 - API contract changes
 
 **Example commit messages:**
+
 - "Migrate from REST to GraphQL"
 - "Introduce service object pattern"
 - "Split monolith into packages"
@@ -26,6 +28,7 @@ Commits that change how the codebase is structured or how components interact.
 Commits that fix non-trivial bugs, especially those that reveal gotchas.
 
 **Indicators:**
+
 - Race condition fixes
 - Edge case handling added
 - Security vulnerability patches
@@ -33,6 +36,7 @@ Commits that fix non-trivial bugs, especially those that reveal gotchas.
 - Data integrity fixes
 
 **Example commit messages:**
+
 - "Fix race condition in checkout"
 - "Handle null user in permission check"
 - "Prevent SQL injection in search"
@@ -43,12 +47,14 @@ Commits that fix non-trivial bugs, especially those that reveal gotchas.
 Commits that remove or replace previous implementations.
 
 **Indicators:**
+
 - Revert commits
 - "Replace X with Y" messages
 - Deprecation removals
 - Failed experiment cleanups
 
 **Example commit messages:**
+
 - "Revert: Add feature flags"
 - "Replace custom ORM with ActiveRecord"
 - "Remove unused GraphQL experiment"
@@ -59,6 +65,7 @@ Commits that remove or replace previous implementations.
 Commits that establish or change project conventions.
 
 **Indicators:**
+
 - Linting rule additions
 - Directory restructuring
 - Naming convention changes
@@ -66,6 +73,7 @@ Commits that establish or change project conventions.
 - Documentation standards
 
 **Example commit messages:**
+
 - "Add ESLint with Airbnb config"
 - "Reorganize components by feature"
 - "Establish test naming convention"
@@ -76,7 +84,7 @@ Commits that establish or change project conventions.
 When using heuristic-based detection (alternative to LLM judgment):
 
 | Signal | Score |
-|--------|-------|
+| ------ | ----- |
 | Message > 100 chars with "why" | +3 |
 | Touches migration files | +3 |
 | Touches config files | +2 |
@@ -96,6 +104,7 @@ When using heuristic-based detection (alternative to LLM judgment):
 ### Large Refactors
 
 A commit touching 100+ files might be:
+
 - Significant (major restructuring)
 - Not significant (automated formatting)
 

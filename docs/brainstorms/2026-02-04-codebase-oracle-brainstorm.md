@@ -10,6 +10,7 @@ topic: codebase-oracle
 A Claude Code plugin that mines git commit history to produce smarter skills, agents, and CLAUDE.md files that understand *why* a codebase evolved the way it did—not just its current state.
 
 The tool walks merge commits chronologically, identifies significant architectural decisions, and produces tiered documentation:
+
 - **Critical patterns** baked into CLAUDE.md (always loaded)
 - **Detailed history docs** queryable on-demand via keyword/file routing or MCP service
 

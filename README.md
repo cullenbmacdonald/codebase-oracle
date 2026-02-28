@@ -11,6 +11,7 @@ Codebase Oracle is a Claude Code plugin that mines your git history to understan
 You've seen this before: an AI assistant confidently suggests a pattern your team abandoned two years ago. Or it recommends an approach that caused a production incident. Or it misses the subtle convention that emerged after three painful refactors.
 
 Static code analysis can't capture:
+
 - Why you migrated from REST to GraphQL (and the edge cases that drove that decision)
 - The race condition that took a week to debug
 - Why that "weird" naming convention exists
@@ -55,6 +56,7 @@ The result: an AI assistant that understands your codebase the way a senior engi
 Run `/oracle:divine` to analyze your repository's complete git history. The oracle walks through commits chronologically, evaluating each one for institutional knowledge value.
 
 Significant commits are categorized:
+
 - **Architectural pivots** — Framework migrations, new patterns, structural changes
 - **Bug patterns** — Recurring issues, discovered gotchas, edge cases
 - **Abandoned approaches** — What was tried and why it didn't work
@@ -78,11 +80,11 @@ Run `/oracle:renew` after pulling new changes. The oracle picks up where it left
 
 Use `/oracle:consult` to query historical context directly:
 
-```
+```text
 /oracle:consult auth
 /oracle:consult --file src/payments/checkout.ts
 /oracle:consult --list
-```
+```text
 
 ---
 
@@ -94,7 +96,7 @@ git clone https://github.com/cullenbmacdonald/codebase-oracle.git
 
 # Symlink to your Claude Code plugins directory
 ln -s /path/to/codebase-oracle ~/.claude/plugins/codebase-oracle
-```
+```text
 
 The plugin will be available in your next Claude Code session.
 
@@ -115,7 +117,7 @@ claude
 
 # Query specific topics
 /oracle:consult authentication
-```
+```text
 
 ---
 

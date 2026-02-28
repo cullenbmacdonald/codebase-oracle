@@ -32,7 +32,7 @@ git log --grep='^Revert' --format='%H|%aI|%s' --reverse > /tmp/oracle-reverts.tx
 
 # 5. Sacred configurations
 git log --format='%H|%aI|%s' --reverse -- '*.yml' '*.yaml' 'Gemfile*' 'package*.json' 'Cargo.toml' 'go.mod' 'requirements*.txt' '**/schema*' '**/migration*' 'config/**' 'db/migrate/**' > /tmp/oracle-config.txt
-```
+```text
 
 **Call all 5 Bash commands in a single message** so they run in parallel.
 
@@ -42,13 +42,13 @@ After all 5 complete, run:
 
 ```bash
 cat /tmp/oracle-*.txt | cut -d'|' -f1-3 | sort -t'|' -k2 -u | sort -t'|' -k1 -u > /tmp/oracle-visions.txt && wc -l < /tmp/oracle-visions.txt
-```
+```text
 
 Read the combined file:
 
 ```bash
 cat /tmp/oracle-visions.txt
-```
+```text
 
 Tell the user: `[Oracle] The scrying reveals X visions from the past...`
 
@@ -58,18 +58,18 @@ Tell the user: `[Oracle] The scrying reveals X visions from the past...`
 
 **For each vision, show progress:**
 
-```
+```text
 [Oracle] Reading rune 1/150: abc1234 "Remove legacy auth" — examining...
 [Oracle] Reading rune 2/150: def5678 "Migrate to JWT" — a prophecy emerges!
 [Oracle] Inscribing prophecy: JWT Authentication
-```
+```text
 
 **For visions worth documenting, consult the full record:**
 
 ```bash
 git show --stat <sha>
 git show <sha>  # the complete vision if needed
-```
+```text
 
 ### What Prophecies to Record
 
@@ -110,11 +110,12 @@ We use JWT tokens for API authentication.
 
 ## Related Files
 - `app/services/auth/jwt_service.rb`
-```
+```text
 
 ### Updating the Codex
 
 As history unfolds chronologically, update existing prophecies:
+
 - Mark superseded ways with `status: superseded`
 - Add "History" sections showing evolution
 - Set `status: abandoned` for forsaken approaches
@@ -138,11 +139,12 @@ entries:
     paths: [file patterns affected]
     category: [category]
     summary: [one line]
-```
+```text
 
 ### Update CLAUDE.md
 
 Add a "Wisdom of the Ancients" section:
+
 - Key architectural decisions (1-2 sentences each)
 - Active warnings and gotchas
 - Current conventions
@@ -159,20 +161,20 @@ Create `.claude/oracle-checkpoint.json`:
   "last_run": "[timestamp]",
   "prophecies_recorded": [count]
 }
-```
+```text
 
 ---
 
 ## Report Completion
 
-```
+```text
 [Oracle] The divination is complete!
 
   Visions examined: 150
   Prophecies inscribed: 47
   Codex location: docs/oracle/
   CLAUDE.md has received the ancient wisdom
-```
+```text
 
 ---
 

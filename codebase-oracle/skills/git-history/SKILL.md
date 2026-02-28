@@ -12,6 +12,7 @@ This skill provides knowledge for extracting institutional wisdom from git repos
 ## The Oracle's Purpose
 
 Current Claude file generators analyze code as it exists now. They miss:
+
 - **Sacred Patterns** - Why was this approach chosen over alternatives?
 - **Hard-Won Wisdom** - What gotchas have been discovered through tribulation?
 - **Abandoned Paths** - What was tried and didn't work?
@@ -24,6 +25,7 @@ The Codebase Oracle divines commit history to capture this ancient knowledge.
 ### Tier 1: Always Present (CLAUDE.md)
 
 Critical wisdom that affects everyday development:
+
 - Key architectural decisions (1-2 sentences each)
 - Active warnings and gotchas
 - Current conventions
@@ -33,11 +35,13 @@ Size target: < 500 words in the Wisdom of the Ancients section.
 ### Tier 2: On-Demand (docs/oracle/)
 
 Detailed prophecies loaded when relevant:
+
 - Full context for architectural decisions
 - Complete bug analysis and fixes
 - Detailed migration stories
 
 Summoned via:
+
 - Keyword matching in seeker queries
 - File-based routing when editing related artifacts
 - Explicit `/oracle:consult <topic>` command
@@ -45,6 +49,7 @@ Summoned via:
 ### Tier 3: Raw Runes (git log)
 
 The original commits, available but never bulk-loaded:
+
 - Referenced by SHA in prophecies
 - Can be inspected for full diff details
 - Source of truth when prophecies need updating
@@ -77,5 +82,6 @@ The original commits, available but never bulk-loaded:
 ## References
 
 For detailed specifications, consult:
+
 - `references/significance-criteria.md` - How visions are judged
 - `references/index-schema.md` - Index of prophecies format
