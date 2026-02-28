@@ -36,6 +36,7 @@ The markdown filename within `docs/oracle/`.
 Format: `YYYY-MM-topic-slug.md`
 
 Examples:
+
 - `2024-03-auth-migration.md`
 - `2024-07-checkout-race-fix.md`
 
@@ -44,11 +45,13 @@ Examples:
 Array of terms that should trigger loading this document.
 
 Extracted from:
+
 - Commit messages (nouns and verbs)
 - File paths (directory names)
 - Manually added relevant terms
 
 Guidelines:
+
 - Include synonyms (auth, authentication, login)
 - Include technical terms (jwt, oauth, session)
 - Include domain terms (checkout, payment, user)
@@ -61,6 +64,7 @@ Glob patterns matching files related to this history.
 Used for file-based routing: when a user is editing a file matching a pattern, the history doc is loaded.
 
 Examples:
+
 - `src/auth/**` - matches any file under src/auth/
 - `lib/session.ts` - matches exact file
 - `**/*controller*.ts` - matches controllers anywhere
@@ -70,6 +74,7 @@ Examples:
 Array of commit SHAs (short form, 7 chars) referenced in the history doc.
 
 Used for:
+
 - Linking to original commits
 - Detecting if history needs updates
 - Cross-referencing between docs
@@ -77,6 +82,7 @@ Used for:
 ### `category`
 
 One of:
+
 - `architectural_pivot`
 - `bug_pattern`
 - `abandoned_approach`
@@ -87,6 +93,7 @@ One of:
 One-line description (< 100 chars) for quick scanning.
 
 Used in:
+
 - Index listings
 - CLAUDE.md references
 - Search result previews
@@ -169,6 +176,7 @@ entries:
 ### Explicit Command
 
 `/oracle:consult <topic>`:
+
 1. Search keywords for matches to `<topic>`
 2. Also search summaries for substring match
 3. Load matching docs
@@ -179,6 +187,7 @@ entries:
 ### Incremental
 
 When new history docs are added:
+
 1. Read existing index
 2. Append new entries
 3. Update `generated`, `last_commit`, `total_docs`
@@ -187,6 +196,7 @@ When new history docs are added:
 ### Rebuild
 
 If index is corrupted or missing:
+
 1. Glob `docs/oracle/*.md`
 2. Parse frontmatter from each file
 3. Build entries from frontmatter fields

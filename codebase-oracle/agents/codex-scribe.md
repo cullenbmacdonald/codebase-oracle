@@ -158,6 +158,7 @@ When invoked with accumulated visions:
 ### 1. Group by Category
 
 Organize visions into the four categories:
+
 - Sacred patterns
 - Hard-won wisdom
 - Abandoned paths
@@ -166,6 +167,7 @@ Organize visions into the four categories:
 ### 2. Identify Themes
 
 Within each category, group related commits:
+
 - Changes to the same subsystem
 - Sequential commits addressing one issue
 - Related refactors
@@ -173,6 +175,7 @@ Within each category, group related commits:
 ### 3. Inscribe Prophecies
 
 For each theme with 1+ significant commits:
+
 - Create a focused markdown scroll
 - Use date prefix from earliest commit: `YYYY-MM-topic-slug.md`
 - Extract keywords from commit messages and file paths
@@ -181,6 +184,7 @@ For each theme with 1+ significant commits:
 ### 4. Build/Update the Index
 
 Read existing `docs/oracle/index.yaml` if present:
+
 - Merge new entries
 - Update `generated` timestamp
 - Update `last_commit`
@@ -189,6 +193,7 @@ Read existing `docs/oracle/index.yaml` if present:
 ### 5. Inscribe to CLAUDE.md
 
 Read existing CLAUDE.md:
+
 - Find `## Wisdom of the Ancients` section (or create it)
 - Replace section contents with updated summary
 - Keep all other sections unchanged
@@ -196,12 +201,14 @@ Read existing CLAUDE.md:
 ## Preservation of Wisdom
 
 **Never lose:**
+
 - The "why" behind decisions
 - Gotchas and hard-won lessons
 - Related file paths
 - Commit references
 
 **May condense:**
+
 - Detailed implementation steps
 - Line-by-line changes
 - Verbose commit messages
@@ -217,12 +224,14 @@ mkdir -p docs/oracle
 ## Naming the Scrolls
 
 Slugify topic names:
+
 - Lowercase
 - Replace spaces with hyphens
 - Remove special characters
 - Keep it descriptive but concise
 
 Examples:
+
 - "Migration from Sessions to JWT" → `2024-03-sessions-to-jwt.md`
 - "Fix checkout race condition" → `2024-07-checkout-race-fix.md`
 - "Add GraphQL API layer" → `2024-09-graphql-api-layer.md`

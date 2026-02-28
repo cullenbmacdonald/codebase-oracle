@@ -26,18 +26,20 @@ Engineers who've been with a project carry this knowledge implicitly. New engine
 A Claude Code plugin with two parallel paths:
 
 ### File-Based Backend (Simpler)
+
 - `docs/history/index.yaml` - routing manifest mapping keywords/files → docs
 - `docs/history/*.md` - detailed historical documentation per significant change
 - `CLAUDE.md` section - critical patterns always in context
 
 ### MCP-Based Backend (Enterprise)
+
 - Central MCP server indexing history across multiple repos
 - Semantic search for historical context
 - Cross-repo queries (e.g., "why does the API client work this way?" while in consumer repo)
 
 Both share the same **history-mining core**:
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────┐
 │                      Codebase Oracle                            │
 ├─────────────────────────────────────────────────────────────────┤
@@ -60,7 +62,7 @@ Both share the same **history-mining core**:
 │  │  └─────────────┘              └─────────────────────────┘  ││
 │  └─────────────────────────────────────────────────────────────┘│
 └─────────────────────────────────────────────────────────────────┘
-```
+```text
 
 ## Technical Considerations
 
@@ -80,13 +82,15 @@ Both share the same **history-mining core**:
 **Decision:** LLM judgment for each commit.
 
 The LLM evaluates each commit against these criteria:
+
 - **Architectural changes:** New modules, framework migrations, pattern shifts
 - **Bug patterns:** Recurring issues, gotchas, edge cases discovered
 - **Abandoned approaches:** Reverted commits, replaced implementations
 - **Convention changes:** Naming, structure, testing pattern evolution
 
 Prompt for significance detection:
-```
+
+```text
 Analyze this commit to determine if it represents significant institutional knowledge:
 
 Commit: {sha}
@@ -104,13 +108,14 @@ Respond with:
 - significant: true/false
 - category: architectural_pivot | bug_pattern | abandoned_approach | convention_emergence | not_significant
 - brief_reason: <one sentence explanation>
-```
+```text
 
 ### Context Condensation
 
 **Trigger:** Before Claude's automatic summarization kicks in (proactive condensation).
 
 **Strategy:**
+
 1. Track accumulated context as commits are processed
 2. When approaching ~50K tokens, pause and write current findings
 3. Generate a summary document for the processed range
@@ -118,6 +123,7 @@ Respond with:
 5. Continue from checkpoint
 
 **Checkpoint format** (`.claude/oracle-checkpoint.json`):
+
 ```json
 {
   "last_commit_sha": "abc123def456",
@@ -126,14 +132,15 @@ Respond with:
   "total_commits_processed": 150,
   "total_significant": 12
 }
-```
+```text
 
 ### Missing PR Description Handling
 
 **Decision:** Almost always infer from diff using LLM.
 
 When commit message is unhelpful (< 50 chars or generic like "Fixed bug"):
-```
+
+```text
 The commit message "{message}" doesn't explain the reasoning.
 Analyze the diff to infer:
 1. What problem was being solved?
@@ -142,7 +149,7 @@ Analyze the diff to infer:
 
 Diff:
 {diff_content}
-```
+```text
 
 ### Index Format (Routing Manifest)
 
@@ -173,7 +180,7 @@ entries:
     commits: [ghi789]
     category: architectural_pivot
     summary: "Refactored API client to use fetch with retry logic"
-```
+```text
 
 ### Query Triggers
 
@@ -214,7 +221,7 @@ See `docs/history/2024-05-api-client-refactor.md` for full context.
 
 ---
 *For detailed history, run `/history <topic>` or see `docs/history/index.yaml`*
-```
+```text
 
 ## Acceptance Criteria
 
@@ -276,7 +283,7 @@ See `docs/history/2024-05-api-client-refactor.md` for full context.
 
 ## Plugin Structure
 
-```
+```text
 codebase-oracle/
 ├── .claude-plugin/
 │   └── plugin.json                    # Plugin manifest
@@ -300,20 +307,23 @@ codebase-oracle/
     ├── detect-workflow.sh             # Detect merge vs squash vs rebase
     ├── get-commits.sh                 # Fetch commit list with metadata
     └── parse-diff.sh                  # Generate diff summaries
-```
+```text
 
 ## References & Research
 
 ### Internal References
+
 - Brainstorm: `docs/brainstorms/2026-02-04-codebase-oracle-brainstorm.md`
 
 ### External References
+
 - Claude Code Plugin Development: Standard plugin structure with skills/, agents/, hooks/
 - MCP TypeScript SDK: `@modelcontextprotocol/server`, `@modelcontextprotocol/node`
 - Git history analysis: `git log --format`, `git diff`, `gh pr view`
 - Conventional Commits: For message parsing and categorization
 
 ### Patterns
+
 - Progressive disclosure: Lean SKILL.md router, detailed references on-demand
 - Tiered documentation: Always-loaded (CLAUDE.md) → on-demand (docs/history/)
 - Hook-based context injection: SessionStart loads routing index

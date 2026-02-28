@@ -10,11 +10,11 @@ Seek the oracle's wisdom about the history of a topic or area of the codebase.
 
 ## Usage
 
-```
+```text
 /oracle:consult <topic>
 /oracle:consult --file <path>
 /oracle:consult --list
-```
+```text
 
 ## Arguments
 
@@ -24,7 +24,7 @@ Seek the oracle's wisdom about the history of a topic or area of the codebase.
 
 ## Examples
 
-```
+```text
 /oracle:consult auth
 → The oracle speaks of authentication's journey...
 
@@ -33,7 +33,7 @@ Seek the oracle's wisdom about the history of a topic or area of the codebase.
 
 /oracle:consult --list
 → The codex contains these prophecies...
-```
+```text
 
 ## The Ritual
 
@@ -44,43 +44,43 @@ Seek the oracle's wisdom about the history of a topic or area of the codebase.
 
 ## Execution
 
-### For topic seeking:
+### For topic seeking
 
-```
+```text
 [Oracle] Consulting the codex for wisdom of "{topic}"...
 
 Read docs/oracle/index.yaml
 Search entries for keyword match in 'keywords' array
 For each match, read the corresponding prophecy from docs/oracle/
 Present the wisdom to the seeker
-```
+```text
 
-### For artifact seeking:
+### For artifact seeking
 
-```
+```text
 [Oracle] Divining the history of this artifact...
 
 Read docs/oracle/index.yaml
 For each entry, check if the given path matches any glob in 'paths'
 For each match, read the corresponding prophecy from docs/oracle/
 Present the wisdom to the seeker
-```
+```text
 
-### For listing:
+### For listing
 
-```
+```text
 [Oracle] Revealing the contents of the codex...
 
 Read docs/oracle/index.yaml
 For each entry, display: file, category, summary
 Format as a scannable scroll
-```
+```text
 
 ## Output Format
 
 When wisdom is found:
 
-```
+```text
 [Oracle] The spirits speak of "{topic}"...
 
 ## {Title from prophecy}
@@ -90,11 +90,11 @@ When wisdom is found:
 ---
 Prophecy source: docs/oracle/{filename}.md
 Anchored to commits: {sha1}, {sha2}
-```
+```text
 
 When no wisdom exists:
 
-```
+```text
 [Oracle] The waters are dark for "{topic}". No prophecies speak of this.
 
 The codex contains wisdom of:
@@ -103,7 +103,7 @@ The codex contains wisdom of:
   • api, graphql, rest
 
 Seek /oracle:consult --list for all known prophecies.
-```
+```text
 
 ## Notes
 
